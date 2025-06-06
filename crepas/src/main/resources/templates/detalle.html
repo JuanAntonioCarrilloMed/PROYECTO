@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Configuración de caracteres y título dinámico con Thymeleaf -->
+    <meta charset="UTF-8">
+    <title th:text="${crepa.credescripcion}">Detalle de la Crepa</title>
+    
+    <!-- Bootstrap CSS para estilos responsivos y modernos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    
+    <style>
+        /* Asegura que el html y body ocupen toda la altura de la ventana */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        /* Usa flexbox para que el body tenga dirección columna */
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* El contenido principal crecerá para ocupar espacio disponible */
+        .main-content {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar principal con logo y botones -->
+    <nav class="navbar navbar-dark bg-dark justify-content-between px-3">
+        <a class="navbar-brand" href="#">
+           <img th:src="@{/img/crepas.jpg}" width="40" height="40" alt="Logo">
+            La Esquina De Las Crepas
+        </a>
+        <div class="d-flex gap-2">
+            <!-- Botón para ver el carrito -->
+            <a th:href="@{/carrito/listado}" class="btn btn-outline-light mr-2">🛒</a>
+            <!-- Botón para cerrar sesión -->
+            <a th:href="@{/listado}" class="btn btn-danger btn-sm mb-2">← Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal para el detalle de la crepa -->
+    <div class="container mt-5 main-content">
+        <!-- Botón para regresar a la página anterior -->
+        <a href="javascript:history.back()" class="btn btn-secondary btn-sm">← Volver</a>
+
+        <!-- Card que muestra la información detallada de la crepa -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <!-- Nombre o descripción de la crepa -->
+                <h2 th:text="${crepa.credescripcion}" class="card-title"></h2>
+                <!-- Categoría a la que pertenece la crepa -->
+                <p class="text-muted" th:text="${crepa.categoria.catdescripcion}"></p>
+                <!-- Precio con formato en pesos -->
+                <p class="h4 text-success" th:text="'$' + ${crepa.creprecio}"></p>
+                <!-- Botón para añadir la crepa al carrito -->
+                <a th:href="@{'/agregar-al-carrito/' + ${crepa.id}}" class="btn btn-carrito btn-sm">🛒 Añadir al carrito</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer con fondo oscuro, texto blanco y contacto -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-1">© 2025 La Esquina De Las Crepas</p>
+            <small>
+                Contacto: 
+                <a href="mailto:info@laesquinadelascrepas.com" class="text-light">
+                    info@laesquinadelascrepas.com
+                </a>
+            </small>
+        </div>
+    </footer>
+
+    <!-- Scripts necesarios para Bootstrap: jQuery, Popper.js y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- Modal para mostrar el carrito de compras -->
+    <div class="modal fade" id="modalCarrito" tabindex="-1" role="dialog" aria-labelledby="modalCarritoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Encabezado del modal con título y botón de cierre -->
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="modalCarritoLabel">🛒 Tu carrito</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Cuerpo del modal donde se cargarán los productos -->
+                <div class="modal-body" id="contenidoCarrito">
+                    <p class="text-center">Cargando productos...</p>
+                </div>
+
+                <!-- Pie del modal con botones para cerrar e ir al carrito -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a th:href="@{/carrito}" class="btn btn-primary btn-sm">Ir al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

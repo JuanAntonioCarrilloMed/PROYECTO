@@ -1,0 +1,66 @@
+/* Estilo para las tarjetas destacadas */
+.vj-destacados .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vj-destacados .col-md-3 {
+    display: flex;
+    margin-bottom: 20px; /* Espacio entre filas */
+}
+
+.vj-destacados .card {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Imagen con altura uniforme */
+.vj-destacados .card img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* El cuerpo de la tarjeta crece para empujar el footer hacia abajo */
+.vj-destacados .card-body {
+    flex-grow: 1;
+}
+
+/* Efecto hover */
+.vj-destacados .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajuste del texto */
+.card-text {
+    font-size: 0.85rem;
+}
+.btn-carrito {
+    background-color: #f28b82; /* Rojo pastel */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    padding: 4px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-carrito:hover {
+    background-color: #e57373;
+}
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
+  }
+</style>
+

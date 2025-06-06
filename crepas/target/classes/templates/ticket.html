@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Título de la página -->
+    <title>Ticket de Compra</title>
+    
+    <!-- Bootstrap 4 CSS para estilos y diseño responsive -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Barra de navegación superior -->
+    <!-- Navbar principal con logo y botones -->
+    <nav class="navbar navbar-dark bg-dark justify-content-between px-3">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/img/crepas.jpg}" width="40" height="40" alt="Logo">
+            La Esquina De Las Crepas
+        </a>
+        <div class="d-flex gap-2">
+            <!-- Botón para ver el carrito -->
+            <a th:href="@{/carrito/listado}" class="btn btn-outline-light mr-2">🛒</a>
+            <!-- Botón para cerrar sesión -->
+            <a th:href="@{/listado}" class="btn btn-danger btn-sm mb-2">← Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal con margen superior -->
+    <div class="container mt-5">
+
+        <!-- Mensaje de agradecimiento -->
+        <h2>🎉 ¡Gracias por tu compra!</h2>
+        <p>Este es tu ticket:</p>
+
+        <!-- Tabla con el detalle del ticket -->
+        <table class="table table-bordered">
+            <!-- Cabecera de la tabla -->
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th> <!-- Número de item -->
+                    <th>Descripción</th> <!-- Nombre o descripción del producto -->
+                    <th>Precio</th> <!-- Precio unitario -->
+                </tr>
+            </thead>
+
+            <!-- Cuerpo de la tabla con Thymeleaf para iterar la lista de productos -->
+            <tbody>
+                <tr th:each="carrito, iterStat : ${carritos}">
+                    <!-- Índice del producto + 1 para numerar desde 1 -->
+                    <td th:text="${iterStat.index + 1}"></td>
+
+                    <!-- Descripción del producto (crepa) -->
+                    <td th:text="${carrito.crepa.credescripcion}"></td>
+
+                    <!-- Precio con signo $ -->
+                    <td th:text="'$' + ${carrito.crepa.creprecio}"></td>
+                </tr>
+            </tbody>
+
+            <!-- Pie de tabla con total -->
+            <tfoot>
+                <tr>
+                    <th colspan="2" class="text-right">Total:</th>
+                    <th th:text="'$' + ${total}"></th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- Botón para regresar al menú, usando JS para volver dos páginas atrás -->
+        <a href="javascript:history.go(-2)" class="btn btn-secondary btn-sm">← Volver a menú</a>
+    </div>
+
+    <!-- Footer fijo al final de la página -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <!-- Derechos reservados -->
+            <p class="mb-1">© 2025 La Esquina De Las Crepas</p>
+
+            <!-- Información de contacto -->
+            <small>Contacto: 
+                <a href="mailto:info@laesquinadelascrepas.com" class="text-light">
+                    info@laesquinadelascrepas.com
+                </a>
+            </small>
+        </div>
+    </footer>
+
+</body>
+</html>

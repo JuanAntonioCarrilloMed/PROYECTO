@@ -1,0 +1,62 @@
+    <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar Crepa - La Esquina De Las Crepas</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" />
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-dark justify-content-between px-3">
+    <a class="navbar-brand" href="#">
+        <img src="/img/crepas.jpg" width="40" height="40" alt="Logo">
+        La Esquina De Las Crepas
+    </a>
+    <div class="d-flex gap-2">
+        <a href="/carrito/listado" class="btn btn-outline-light mr-2">🛒</a>
+        <a href="/listado" class="btn btn-danger btn-sm mb-2">← Cerrar Sesión</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Agregar Nueva Crepa</h2>
+
+    <form th:action="@{/crepa/guardar}" th:object="${crepa}" method="post">
+
+        <div class="form-group">
+            <label for="credescripcion">Ingredientes</label>
+            <input type="text" id="credescripcion" th:field="*{credescripcion}" class="form-control" placeholder="Ej: Fresa, Nutella, Plátano" required />
+        </div>
+
+        <div class="form-group">
+            <label for="creprecio">Precio ($)</label>
+            <input type="number" step="0.01" id="creprecio" th:field="*{creprecio}" class="form-control" placeholder="Ej: 45.00" required />
+        </div>
+
+        <div class="form-group">
+    <label for="categoria">Categoría</label>
+    <input type="text" id="categoria" th:field="*{categoria}" class="form-control" placeholder="Ej: Dulce, Salada, Especial" required />
+</div>
+
+
+        <div class="form-group">
+            <label for="creimagen">Ruta de Imagen</label>
+            <input type="text" id="creimagen" th:field="*{creimagen}" class="form-control"
+                   placeholder="Ej: /img/miimagen.jpg o https://..." required />
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar Crepa</button>
+        <a href="javascript:history.back()" class="btn btn-secondary btn-sm">← Volver</a>
+    </form>
+</div>
+
+<footer class="bg-dark text-white text-center py-4 mt-auto">
+    <div class="container">
+        <p class="mb-1">© 2025 La Esquina De Las Crepas</p>
+        <small>Contacto: <a href="mailto:info@laesquinadelascrepas.com" class="text-light">info@laesquinadelascrepas.com</a></small>
+    </div>
+</footer>
+
+</body>
+</html>
